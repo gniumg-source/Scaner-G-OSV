@@ -1,0 +1,94 @@
+Cómo contribuir
+Nos encantaría recibir sus parches y contribuciones a este proyecto. Solo hay algunas pautas que deben seguir.
+
+Acuerdo de licencia de colaborador
+Las contribuciones a este proyecto deben ir acompañadas de un Acuerdo de Licencia de Colaborador. Usted (o su empleador) conserva los derechos de autor de su contribución; esto simplemente nos autoriza a usarla y redistribuirla como parte del proyecto. Visite https://cla.developers.google.com/ para consultar sus acuerdos actuales o firmar uno nuevo.
+
+Por lo general, solo es necesario enviar un CLA una vez, por lo que si ya envió uno (incluso si fue para un proyecto diferente), probablemente no necesite hacerlo nuevamente.
+
+Revisiones de código
+Todas las entregas, incluidas las de los miembros del proyecto, requieren revisión. Para ello, utilizamos las solicitudes de extracción de GitHub. Consulta la Ayuda de GitHub para obtener más información sobre el uso de las solicitudes de extracción.
+
+Al crear una solicitud de extracción, utilice la plantilla de solicitud de extracción proporcionada y complete las secciones para garantizar un proceso de revisión sin problemas.
+
+Para cualquier nueva característica, por favor, crea primero una incidencia para discutir los cambios propuestos antes de realizar una solicitud de incorporación de cambios. Esto ayuda a garantizar que tu contribución esté alineada con los objetivos del proyecto y evita la duplicación de trabajo.
+
+Pautas de la comunidad
+Este proyecto sigue las Pautas de la comunidad de código abierto de Google .
+
+Documentación de contribución
+Revise el archivo README de la documentación para obtener más información sobre cómo contribuir a la documentación.
+
+Contribuyendo código
+Prerrequisitos
+Instalar:
+
+Vaya a 1.21+, use go versionpara comprobar.
+GoReleaser (opcional, solo si desea compilaciones reproducibles).
+Nota
+
+Los scripts dentro /scriptsesperan ejecutarse desde la raíz del repositorio
+
+Edificio
+Construir usando sologo
+Ejecute lo siguiente en el directorio del proyecto:
+
+./scripts/build.sh
+Produce osv-scannerbinario en el directorio del proyecto.
+
+Construir usandogoreleaser
+Ejecute lo siguiente en el directorio del proyecto:
+
+./scripts/build_snapshot.sh
+Consulte la documentación de GoReleaser para conocer las opciones de compilación.
+
+También puedes reproducir las compilaciones descargables consultando la etiqueta específica y ejecutando goreleaser build, usando la misma versión de Go que la utilizada durante el lanzamiento real (consulta los flujos de trabajo de goreleaser).
+
+Ejecución de pruebas
+Para ejecutar pruebas:
+
+./scripts/run_tests.sh
+Para obtener resultados de prueba consistentes, ejecute con GOTOOLCHAIN=go<go version in go.mod>.
+
+De forma predeterminada, se omiten las pruebas que requieren dependencias adicionales a las de la cadena de herramientas Go. Habilite estas pruebas configurando la variable env TEST_ACCEPTANCE=true.
+
+Puede generar un informe de cobertura HTML ejecutando:
+
+./scripts/generate_coverage_report.sh
+Puede regenerar instantáneas configurando UPDATE_SNAPS=trueal ejecutar pruebas:
+
+UPDATE_SNAPS=true ./scripts/run_tests.sh
+cmdLas pruebas se utilizan go-vcrpara proporcionar una aplicación personalizada http.Clientpara las solicitudes osv.dev al querybulkpunto final que utiliza instantáneas de solicitudes llamadas casetes para reducir el ruido de los cambios en los avisos y, al mismo tiempo, proporcionar un alto grado de confianza.
+
+Puede controlar el comportamiento de la grabación configurando la TEST_VCR_MODEvariable de entorno en uno de los modos admitidos , especificado por su nombre sin el Modesufijo o por su valor int .
+
+El modo predeterminado localmente es ReplayWithNewEpisodes, lo que significa que las interacciones existentes se reproducirán mientras que las nuevas se grabarán y agregarán al casete existente; cuando se ejecuta en CI, el modo predeterminado es , ReplayOnlylo que significa que se generará un error si falta una interacción http en el casete de una prueba.
+
+Si agrega un archivo de bloqueo con vulnerabilidades conocidas para los datos de prueba, agregue también un osv-scanner.tomlarchivo de configuración para excluir esas vulnerabilidades de los análisis del repositorio.
+
+Pelusa
+Para limpiar su código, ejecute
+
+./scripts/run_lints.sh
+Realizar confirmaciones
+Por favor, siga la especificación de Commits Convencionales al agrupar commits durante una fusión. Esta suele ser la confirmación fusionada en la rama principal y suele basarse en el título de la PR. Esto nos ayuda a automatizar procesos como la generación del registro de cambios y garantiza un historial de commits claro y consistente.
+
+Algunos tipos: feat:, fix:, docs:, chore:, refactor:, y otros.
+
+Documentación de contribución
+Siga estos pasos para contribuir con la documentación exitosamente.
+
+Bifurcar el repositorio.
+Realice los cambios deseados en la documentación.
+Obtenga una vista previa de los cambios creando una página de GitHub para su bifurcación, compilando desde su rama de trabajo.
+En tu bifurcación, ve a la pestaña de configuración y luego a la configuración de la página de GitHub. URL de ejemplo: https://github.com/{your-github-profile}/osv-scanner/settings/pages
+En "Compilar e implementar", seleccione "Implementar desde una rama".
+Establezca la rama en su rama de trabajo
+Configurar la página de Github para compilar desde la carpeta "/docs"
+Presione guardar y espere a que se cree su sitio.
+Una vez que esté listo, haga clic en el enlace y obtenga una vista previa de los documentos.
+La imagen muestra la configuración de la interfaz de usuario para crear la página de GitHub, que se describe en el paso 3 de las instrucciones de contribución a la documentación.
+
+Si está satisfecho con los cambios, abra una solicitud de modificación.
+En la PR, incluye un enlace a la página de GitHub de tu bifurcación para que podamos obtener una vista previa de los cambios.
+Para obtener información sobre cómo ejecutar la documentación localmente, consulte nuestro archivo README de documentación .
