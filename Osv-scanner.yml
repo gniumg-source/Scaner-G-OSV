@@ -1,0 +1,59 @@
+ÉAME
+Código de conducta
+Acción CI/CD de OSV-Scanner
+Versión v2.3.2
+
+La acción CI/CD de OSV-Scanner aprovecha la base de datos OSV.dev y la herramienta CLI de OSV-Scanner para rastrear y notificarle sobre vulnerabilidades conocidas en sus dependencias para más de 11 idiomas y ecosistemas .
+
+Actualmente ofrecemos dos flujos de trabajo reutilizables diferentes para Github:
+
+Un flujo de trabajo que activa un escaneo con cada solicitud de extracción y solo informará sobre nuevas vulnerabilidades introducidas a través de la solicitud de extracción.
+Un flujo de trabajo que realiza un análisis completo de vulnerabilidades, que puede configurarse para analizarse durante las inserciones o con una programación regular . El análisis completo de vulnerabilidades también puede configurarse para ejecutarse durante la publicación para evitar publicar con vulnerabilidades conocidas en las dependencias.
+Actualmente no hay flujos de trabajo prediseñados para otras plataformas, ¡pero agradecemos cualquier contribución para esto!
+
+Escaneo programado
+Analizar regularmente su proyecto en busca de vulnerabilidades puede alertarle sobre nuevas vulnerabilidades en su árbol de dependencias. El análisis programado analizará su proyecto según un cronograma establecido o al enviar una nueva confirmación, e informará de todas las vulnerabilidades conocidas. Si se encuentran vulnerabilidades, se informará a la página "Análisis de código".
+
+Resultados del escaneo de código OSV-Scanner	Entrada detallada de escaneo de código
+Imagen de los resultados en la pestaña de escaneo de código	Imagen de detalles de una entrada específica de escaneo de código
+Escanear en solicitud de extracción
+Analizar tu proyecto en cada solicitud de incorporación de cambios puede ayudarte a evitar vulnerabilidades. El análisis de la solicitud de incorporación de cambios compara el análisis de vulnerabilidades de la rama de destino con el de la rama de funcionalidad, y fallará si se introducen nuevas vulnerabilidades a través de la rama de funcionalidad. Puedes optar por evitar la fusión si se introducen nuevas vulnerabilidades, pero por defecto, la comprobación solo avisará a los usuarios.
+
+Error en la comprobación de PR del escáner OSV	Salida de verificación de escaneo de PR
+Captura de pantalla de PR que presenta una dependencia vulnerable y la verificación de bloqueo del escáner osv	Captura de pantalla de la salida del escáner osv
+Instalación
+La acción de GitHub OSV-Scanner se puede instalar de forma automática o manual .
+
+Instalación automática
+Desde la página principal de tu proyecto de GitHub, haz clic en la pestaña “Acciones” en la barra de navegación.
+Seleccione la pestaña de acciones en la barra de navegación del repositorio.
+
+(Si ya tiene flujos de trabajo existentes) Seleccione "Nuevo flujo de trabajo" en la parte superior izquierda.
+
+Buscar "OSV".
+
+La imagen muestra la barra de búsqueda de Acciones de GitHub.
+
+Seleccione “OSV Scanner” de la lista de flujos de trabajo y luego haga clic en “Configurar”.
+La imagen muestra el flujo de trabajo del escáner OSV después de la búsqueda
+
+Configurar el flujo de trabajo
+La acción de GitHub instalada automáticamente incluye funcionalidad tanto para un escaneo programado como para un escaneo en solicitud de extracción .
+
+Si solo desea un escaneo programado, puede comentar el trabajo "scan-pr" y solo ejecutar la acción en "schedule" y en "push".
+
+Si solo desea ejecutar un escaneo en una solicitud de extracción, puede comentar el trabajo "escaneo programado" y solo ejecutar la acción en "solicitud de extracción" y "grupo de fusión".
+
+Si desea ambas, puede dejar la acción como está. Si desea que estas funciones sean independientes para fines de seguimiento, le recomendamos seguir las instrucciones de instalación manual .
+
+Confirmar los cambios.
+Instalación manual
+Para instalar manualmente la Acción CI/CD para Github, siga las instrucciones en nuestra página de documentación principal .
+
+Personalización
+Para obtener más información sobre las entradas opcionales para la acción de GitHub, consulte nuestra página de documentación principal .
+
+Ver resultados
+Los mantenedores pueden revisar los resultados de los análisis programados accediendo a la Security > Code Scanningpestaña de su proyecto. También pueden ver los detalles de la vulnerabilidad haciendo clic en los detalles de la acción fallida.
+
+Para los análisis de solicitudes de extracción, los resultados pueden consultarse haciendo clic en los detalles de la acción fallida, ya sea desde la pestaña de acciones del proyecto o directamente en la solicitud de extracción. Los resultados también se incluyen en las anotaciones de GitHub, en la pestaña "Archivos modificados" de la solicitud de extracción.
