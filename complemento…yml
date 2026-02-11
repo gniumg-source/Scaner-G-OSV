@@ -1,0 +1,46 @@
+Selección manual del complemento OSV-Scalibr
+Experimental
+Tabla de contenido
+Selección manual del complemento OSV-Scalibr
+Habilitar y deshabilitar complementos
+Ajustes preestablecidos
+Detectores
+De forma predeterminada, OSV-Scanner habilita automáticamente los complementos necesarios para cada situación de escaneo (consulte esta página para obtener más información). Sin embargo, si la selección predeterminada no es adecuada o necesita complementos adicionales de OSV-Scalibr (por ejemplo, detectores), puede habilitarlos o deshabilitarlos manualmente.
+
+Habilitar y deshabilitar complementos
+Puede controlar qué complementos ejecutar mediante los siguientes indicadores:
+
+--experimental-plugins: Habilita una lista separada por comas de complementos específicos que se utilizarán junto con los complementos predeterminados para el comando que se está ejecutando
+--experimental-disable-plugins: Desactiva una lista separada por comas de complementos específicos.
+--experimental-no-default-plugins: Excluye los complementos predeterminados para que el comando que se está ejecutando no se incluya automáticamente
+Para obtener una lista completa de los nombres de complementos disponibles, consulte la documentación de OSV-Scalibr aquí: https://github.com/google/osv-scalibr/blob/main/docs/supported_inventory_types.md
+
+Ajustes preestablecidos
+También puede habilitar o deshabilitar varios ajustes preestablecidos, que agrupan múltiples complementos.
+
+Ejemplo:
+
+# This will enable all sbom plugins + cargolock extractor + requirements extractor
+osv-scanner scan source --experimental-plugins sbom,rust/cargolock,python/requirements
+
+# This will enable all lockfile plugins, except the cargolock and requirements extractors
+osv-scanner scan source --experimental-plugins lockfile --experimental-disable-plugins rust/cargolock,python/requirements
+
+Preajustes disponibles:
+
+Programar	Descripción
+sbom	Predeterminado para el escaneo de directorios.
+lockfile	Predeterminado para el escaneo de archivos de bloqueo.
+directory	Predeterminado para el escaneo de directorios.
+artifact	Predeterminado para escaneo de imágenes.
+Detectores
+OSV-Scalibr proporciona detectores que pueden identificar posibles problemas de seguridad más allá de las vulnerabilidades conocidas. Ofrecemos soporte experimental para estos detectores. Actualmente, los resultados de los detectores solo están disponibles en formato JSON en [nombre del archivo] experimental_generic_findings.
+
+Preajustes de detector disponibles:
+
+Programar	Descripción
+untested	Encuentra dependencias que no están probadas.
+weakcreds	Detecta credenciales débiles.
+govulncheck	Comprueba si hay vulnerabilidades en los binarios de Go.
+cis	Comprueba el cumplimiento de los puntos de referencia del CIS.
+Ejemplo de ejecución del detector
