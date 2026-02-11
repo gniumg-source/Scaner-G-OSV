@@ -1,0 +1,89 @@
+Propiedades de un registro OSV de alta calidad
+Versión
+1.0.0 (SEMVER)
+
+Objetivo
+Describe el registro OSV “suficientemente bueno” que será importado por OSV.dev
+
+Fuera de alcance
+Este artículo no aborda el problema de la pérdida de bits de los registros con el tiempo, tras una importación inicial exitosa. El problema de la revalidación continua y el tratamiento de los registros importados correctamente se abordará por separado en el documento complementario " Gestión de la perecibilidad de los registros OSV" .
+
+Aplazado a una iteración futura: validar la existencia de funciones vulnerables en el ecosystem_specificcampo, si se suministran.
+
+Audiencia
+Productores de discos de OSV
+Consumidores de registros OSV.dev de flujo descendente
+Razón fundamental
+OSV.dev busca ser una base de datos completa, precisa y actualizada de vulnerabilidades conocidas, altamente automatizable. Para alcanzar este objetivo de precisión, es necesario definir y aplicar de forma sostenible un estándar de calidad.
+
+Propiedades de un registro OSV de alta calidad
+Válido
+Como requisito previo, se asume que un registro supera la validación del esquema JSON para la versión del esquema OSV que declara cumplir en el schema_versioncampo, o la 1.0.0 si no la cumple. También se asume que la vulnerabilidad descrita en el registro OSV es válida y afecta al software descrito.
+
+Preciso
+Un registro OSV de alta calidad permite que un consumidor de ese registro pueda responder las siguientes preguntas de forma automatizada y a escala:
+
+“¿Esta vulnerabilidad, tal como se describe, me afecta?”
+“¿A qué versión necesito actualizar o qué parches necesito aplicar para que no me afecte?”
+“¿Debo reemplazar o eliminar este paquete (potencialmente huérfano) con vulnerabilidades conocidas sin corregir?”
+La definición de "impacto" varía según la precisión de la información disponible (es decir, a nivel de paquete o a nivel de símbolo para paquetes de bibliotecas de software). La precisión a nivel de paquete es el estándar mínimo.
+
+para rangos de versiones y confirmaciones
+affected[]. ranges[]. events[]. introducedse define
+preferir affected[]. ranges[]. events[]. fixedsobre affected[]. ranges[]. events.last_affected
+Esto minimiza los falsos negativos.
+rangos distintos para introduced..fixedy/o introduced..last_affected (es decir, las versiones introducidas y corregidas o las confirmaciones no pueden ser las mismas)
+Los valores en introducedson anteriores o menores que fixed, last_affectedsegún el registro de paquetes canónicos o el control de versiones del proyecto.
+para los rangos de versiones ( ECOSYSTEMy SEMVER)
+Las versiones existen en el ecosistema de paquetes específicos.
+para rangos de confirmación ( GIT)
+Las confirmaciones existen en el lugar especificado repo (es decir, no son de otra bifurcación de GitHub)
+El package.ecosystem, y un identifierprefijo único para él, se definen en el esquema OSV
+el package.nameexiste dentro del definido package.ecosystemy está codificado canónicamente para que no sea ambiguo (es decir, normalizado)
+Las URL de los paquetes en el package.urlcampo se ajustan a la especificación
+referenceLas URL devuelven una respuesta 2xx o 3xx en el momento de la publicación
+Identificable
+Cuando sea relevante, aliasse incluye un registro CVE equivalente
+Cuando un registro OSV consolida múltiples vulnerabilidades en otro ecosistema (o universo), relatedhay múltiples identificadores presentes
+Cuando un registro OSV describe una vulnerabilidad que se encuentra “aguas abajo” de otra en otro ecosistema (o universo), upstreamestán presentes identificadores relevantes.
+Ejemplos
+GO-2024-2687
+Tiene introducedy fixedversiones
+Tiene un alias para un ID de registro CVE
+Tiene un revés
+OSV-2024-98
+Tiene introducedy fixedse compromete
+Las confirmaciones existen en el repositorio
+DSA-5678-1
+Tiene introducedy fixedversiones
+Tiene múltiples relatedID de registros CVE
+Apéndice A: Validación del esquema OSV
+(Como en la versión 1.6.3, generado por Gemini a partir del esquema JSON de OSV )
+
+Información de alto nivel:
+
+id: Un identificador de cadena único para la vulnerabilidad.
+modificado: una marca de tiempo (en formato RFC3339, en UTC, terminada en “Z”) que indica cuándo se actualizó por última vez la información de vulnerabilidad.
+Opcional, pero validado cuando está presente:
+
+schema_version: una cadena que especifica la versión del esquema que se está utilizando.
+publicado/retirado: marcas de tiempo (en formato RFC3339, en UTC, terminadas en “Z”) para cuando se publicó o retiró la vulnerabilidad.
+alias/relacionados/upstream: matrices de cadenas para identificadores alternativos, vulnerabilidades relacionadas o upstream.
+resumen/detalles: Descripciones de cadenas de la vulnerabilidad.
+gravedad: una matriz de objetos que detallan la gravedad utilizando diferentes sistemas de puntuación (por ejemplo, CVSS v2, v3 o v4), si están disponibles.
+afectados: una matriz de objetos que describen qué paquetes están afectados, incluidos detalles como:
+paquete: el ecosistema (por ejemplo, npm, PyPI), el nombre y la URL del paquete (PURL) del paquete afectado.
+gravedad: gravedad del paquete específico (si es diferente de la gravedad general).
+rangos: información sobre los rangos de versiones afectadas, rangos de confirmación o identificadores específicos del ecosistema.
+versiones: Una lista de versiones específicas afectadas.
+ecosystem_specific/database_specific: Datos adicionales específicos del ecosistema del paquete o de la base de datos de vulnerabilidades.
+referencias: una matriz de objetos que proporcionan URL a recursos externos sobre la vulnerabilidad, categorizados por tipo (por ejemplo, aviso, artículo, discusión).
+créditos: un conjunto de objetos que dan crédito a personas u organizaciones involucradas en descubrir, informar o solucionar la vulnerabilidad.
+database_specific: Un objeto flexible para cualquier información adicional específica de la base de datos que utiliza este esquema.
+Reglas de validación adicionales:
+
+marca de tiempo: una definición personalizada que garantiza que las marcas de tiempo se adhieran al formato de fecha y hora RFC3339 (por ejemplo, “2023-11-15T12:34:56Z”).
+additionalProperties: false: Esto evita que se agreguen propiedades adicionales al objeto JSON más allá de aquellas definidas en el esquema.
+Requisitos específicos en affectedla matriz:
+Hay validaciones condicionales basadas en el typerango de , lo que garantiza que estén presentes las propiedades correctas (por ejemplo, repoes necesario cuando typees GIT).
+Una verificación lógica garantiza que si last_affectedse especifica en events, entonces fixedno puede estar presente en la misma eventsmatriz.
