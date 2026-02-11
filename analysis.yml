@@ -1,0 +1,22 @@
+Call analysis in Rust
+Experimental
+Call analysis in Rust is still considered experimental.
+
+Running call analysis for Rust will execute build scripts (build.rs) in your dependencies as part of the compilation. This may execute arbitrary code.
+
+OSV-Scanner compiles Rust source code and analyzes the output binary’s DWARF debug information to identify called vulnerable functions.
+
+Additional Dependencies
+Rust toolchain (including cargo) that can compile the source code being scanned needs to be installed and available on PATH.
+
+The installed Rust toolchain must be capable of compiling every crate/target in the scanned code, for code with a lot of dependencies this will take a few minutes.
+
+Limitations
+Current implementation has a few limitations:
+
+Does not support dependencies on proc-macros (Tracked in #464)
+Does not support any dependencies that are dynamically linked
+Does not support dependencies that link external non-rust code
+Example
+osv-scanner scan source --call-analysis=rust --no-call-analysis=go ./my/project/path
+
