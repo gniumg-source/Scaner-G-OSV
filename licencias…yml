@@ -1,0 +1,33 @@
+Escaneo de licencias
+Tabla de contenido
+Escaneo de licencias
+Resumen de la licencia y violaciones
+Ejemplo de violación de licencia
+Anular licencia
+OSV-Scanner admite la comprobación de licencias como función oficial. Los datos provienen de la API deps.dev .
+
+Resumen de la licencia y violaciones
+La --licensesbandera proporciona un resumen de las licencias utilizadas por sus dependencias. Para mostrar también las infracciones, puede proporcionar una lista de licencias permitidas como argumento:
+
+# Show license summary only
+osv-scanner --licenses path/to/repository
+
+# Show the license summary and violations against an allowlist (provide the list after the = sign):
+osv-scanner --licenses="comma-separated list of allowed licenses" path/to/directory
+
+Incluya sus licencias permitidas como una lista separada por comas. OSV-Scanner reconoce las licencias en formato SPDX. Indique las licencias permitidas utilizando identificadores de licencia SPDX .
+
+Ejemplo de violación de licencia
+Si desea permitir las siguientes licencias:
+
+Licencia BSD de 3 cláusulas “nueva” o “revisada”
+Licencia Apache 2.0
+MIT
+Su comando quedaría de esta forma:
+
+osv-scanner --licenses="BSD-3-Clause,Apache-2.0,MIT" path/to/directory
+
+Anular licencia
+A veces, la licencia no se puede recuperar o no se aplica a su uso específico. En esos casos, puede anular la licencia de un paquete específico configurándola en el archivo de configuración.
+
+Consulte la documentación de configuración para saber cómo hacer esto.
