@@ -1,0 +1,13 @@
+rangos: información sobre los rangos de versiones afectadas, rangos de confirmación o identificadores específicos del ecosistema.
+versiones: Una lista de versiones específicas afectadas.
+ecosystem_specific/database_specific: Datos adicionales específicos del ecosistema del paquete o de la base de datos de vulnerabilidades.
+referencias: una matriz de objetos que proporcionan URL a recursos externos sobre la vulnerabilidad, categorizados por tipo (por ejemplo, aviso, artículo, discusión).
+créditos: un conjunto de objetos que dan crédito a personas u organizaciones involucradas en descubrir, informar o solucionar la vulnerabilidad.
+database_specific: Un objeto flexible para cualquier información adicional específica de la base de datos que utiliza este esquema.
+Reglas de validación adicionales:
+
+marca de tiempo: una definición personalizada que garantiza que las marcas de tiempo se adhieran al formato de fecha y hora RFC3339 (por ejemplo, “2023-11-15T12:34:56Z”).
+additionalProperties: false: Esto evita que se agreguen propiedades adicionales al objeto JSON más allá de aquellas definidas en el esquema.
+Requisitos específicos en affectedla matriz:
+Hay validaciones condicionales basadas en el typerango de , lo que garantiza que estén presentes las propiedades correctas (por ejemplo, repoes necesario cuando typees GIT).
+Una verificación lógica garantiza que si last_affectedse especifica en events, entonces fixedno puede estar presente en la misma eventsmatriz.
