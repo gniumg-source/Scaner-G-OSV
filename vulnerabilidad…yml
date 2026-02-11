@@ -1,0 +1,167 @@
+Preguntas frecuentes
+Tabla de contenido
+Preguntas frecuentes
+Fondo
+¿Qué es OSV?
+¿Para quién es OSV?
+¿Por qué un nuevo formato para describir la vulnerabilidad?
+¿Quién utiliza el esquema OSV?
+Uso
+¿Cómo uso OSV como usuario de código abierto?
+¿Cómo uso OSV como mantenedor de base de datos de vulnerabilidades?
+¿Cómo puedo contribuir a OSV o hacer una pregunta?
+Datos
+¿Por qué no hay un registro disponible?
+He encontrado algo incorrecto con los datos.
+¿Está disponible la base de datos para descargar?
+Quiero descargar solo los registros agregados o modificados recientemente
+¿Puedo aportar datos?
+¿Qué hace OSV.dev con los registros que importa?
+¿Cómo maneja OSV.dev los registros retirados?
+¿Cómo maneja OSV.dev los registros eliminados?
+Infraestructura
+¿La tasa de API está limitada?
+¿Existe algún límite en el tamaño de las respuestas?
+¿Cuáles son los objetivos de nivel de servicio (SLO) de OSV.dev?
+Fondo
+¿Qué es OSV?
+OSV consta de:
+
+El esquema OSV : un formato de datos fácil de usar que se adapta con precisión a los esquemas de versiones de código abierto.
+Infraestructura de referencia ( sitio web OSV.dev , API y herramientas) que agrega, enriquece e indexa datos de vulnerabilidad de bases de datos que utilizan el esquema OSV.
+OSV-Scanner , la interfaz oficialmente compatible con OSV.dev
+Creamos OSV para abordar muchas de las deficiencias a la hora de abordar vulnerabilidades en software de código abierto utilizando soluciones existentes.
+
+Consulte nuestras publicaciones de blog para obtener más detalles:
+
+Lanzamiento de OSV
+Anuncio de un esquema de vulnerabilidad unificado para código abierto
+OSV y el ciclo de vida de la vulnerabilidad
+¿Para quién es OSV?
+El esquema OSV y OSV.dev pueden ser utilizados por:
+
+Consumidores de código abierto: consultando la API de OSV.dev y utilizando nuestras herramientas para encontrar vulnerabilidades conocidas en sus dependencias.
+Proyectos de código abierto: publicando vulnerabilidades en formato OSV y haciendo que OSV.dev las importe.
+Productores de bases de datos de vulnerabilidades: haciendo que la base de datos esté disponible en formato OSV.
+¿Por qué un nuevo formato para describir la vulnerabilidad?
+Descubrimos que no existía un formato estándar que:
+
+Aplica una especificación de versiones que coincida con precisión con los esquemas de nombres y versiones utilizados en los ecosistemas de paquetes de código abierto. Por ejemplo, asociar una vulnerabilidad como una CVE con el nombre de un paquete y su conjunto de versiones en un gestor de paquetes es difícil de automatizar con mecanismos existentes como los CPE.
+Se puede utilizar para describir vulnerabilidades en cualquier ecosistema de código abierto, sin necesidad de una lógica dependiente del ecosistema para procesarlas.
+Es fácil de utilizar tanto por sistemas automatizados como por humanos.
+Un formato unificado permite que las bases de datos de vulnerabilidades, los usuarios de código abierto y los investigadores de seguridad compartan fácilmente herramientas y aprovechen las vulnerabilidades en todo el código abierto. Esto se traduce en una visión más completa de las vulnerabilidades en código abierto para todos, así como en tiempos de detección y remediación más rápidos gracias a una automatización más sencilla.
+
+¿Quién utiliza el esquema OSV?
+Las ventajas del esquema OSV han propiciado su adopción por varias bases de datos de vulnerabilidades, como GitHub Security Advisories, PyPA, RustSec y muchas más. La lista completa de bases de datos se puede consultar aquí .
+
+Uso
+¿Cómo uso OSV como usuario de código abierto?
+OSV.dev proporciona una API fácil de usar para realizar consultas en la base de datos agregada de vulnerabilidades.
+
+Las herramientas de línea de comandos también están disponibles para el escaneo de vulnerabilidades de SBOM, manifiestos de lenguaje e imágenes de contenedores.
+
+Existen numerosas integraciones de terceros con la API, y hemos dejado de mantener una lista exhaustiva. Puedes probar esta búsqueda en GitHub como punto de partida.
+
+¿Cómo uso OSV como mantenedor de base de datos de vulnerabilidades?
+Al hacer que su base de datos de vulnerabilidades esté disponible en formato OSV , los usuarios de código abierto tendrán una forma consistente de consumir vulnerabilidades en todos los ecosistemas de código abierto.
+
+Las bases de datos de vulnerabilidad también pueden beneficiarse de un intercambio y una distribución de vulnerabilidades más sencillos con otras bases de datos que utilizan el formato OSV.
+
+¿Cómo puedo contribuir a OSV o hacer una pregunta?
+¡OSV es completamente de código abierto!
+
+El código de infraestructura está disponible aquí
+El código del escáner OSV está disponible aquí
+La especificación del esquema OSV está disponible aquí
+Si tienes alguna pregunta, ¡no dudes en crear un problema!
+
+Datos
+¿Por qué no hay un registro disponible?
+Si no puede recuperar un registro que esperaba poder encontrar, puede deberse a que no se importó correctamente debido a un problema de calidad.
+
+Si un registro no cumple con la barra de calidad de OSV.dev , la página 404 de la vulnerabilidad lo indicará.
+
+Debes plantear esto a la base de datos local responsable del registro.
+
+He encontrado algo incorrecto con los datos.
+La calidad de los datos es fundamental para nosotros. Recuerde que OSV.dev es un agregador de registros OSV de diversas fuentes y que la mejor manera de corregir los datos es en la fuente.
+
+Preferimos evitar tener que actuar como intermediarios entre los consumidores finales de los datos y las fuentes ascendentes, ya que esto agrega un valor limitado y solo agrega demoras.
+
+Si está disponible, se incluye un enlace intuitivo a la fuente del registro autorizado como Sourcecampo en la página de vulnerabilidad individual. Debe seguir el proceso específico de la fuente para actualizar los datos.
+
+Para las fuentes que son un repositorio Git, el Import Sourcecampo apunta a la fuente autorizada de los datos y usted podrá crear una solicitud de extracción/combinación o presentar un problema contra el repositorio.
+
+Si no puede obtener satisfacción después de tratar directamente con la fuente de los datos, presente un problema etiquetado con data quality.
+
+¿Está disponible la base de datos para descargar?
+¡Sí!
+
+La base de datos está disponible en un depósito GCS mantenido por OSV: gs://osv-vulnerabilities (también se puede explorar públicamente a través de Google Cloud Console con un inicio de sesión)
+
+Más información sobre cómo descargar la base de datos está disponible aquí .
+
+Quiero descargar solo los registros agregados o modificados recientemente
+Sí, proporcionamos un modified_id.csvarchivo que permite identificar registros de vulnerabilidades añadidos o modificados recientemente. Este archivo está disponible en la raíz de nuestro bucket GCS en gs://osv-vulnerabilities/modified_id.csv.
+
+El formato de este archivo es:
+
+<iso modified date>,<ecosystem_dir>/<id>
+
+Por ejemplo:
+
+2024-08-15T00:00:00Z,PyPI/PYSEC-2021-123
+
+Además, cada directorio de ecosistema (por ejemplo, gs://osv-vulnerabilities/PyPI/) contiene un modified_id.csvarchivo con el mismo formato, pero solo para las vulnerabilidades de ese ecosistema y sin el <ecosystem_dir>prefijo en la segunda columna.
+
+Al rastrear las entradas de estos archivos, puede determinar qué vulnerabilidades son nuevas o se han actualizado desde su última descarga. El archivo CSV está ordenado cronológicamente de forma inversa, por lo que puede reproducirlo y detenerlo cuando llegue a una hora de modificación que ya haya procesado.
+
+¿Puedo aportar datos?
+¡Sí!
+
+Si trabaja en un proyecto (como una distribución de Linux) y desea contribuir con avisos de seguridad, consulte nuestra guía de contribución de datos en GitHub.
+
+¿Qué hace OSV.dev con los registros que importa?
+Enumeración de versiones (para ecosistemas que no son SemVer donde existe un código de enumeración de versiones compatible )
+Cálculo de la URL del paquete (si es necesario)
+Enumeración de confirmaciones afectadas por Git y asignación de confirmaciones a etiquetas
+Repetir el cálculo por lotes de alias ( Nota : cada vez que cambia el campo, se actualiza el campo del registro )aliasesmodified
+Tanto la enumeración de versiones como la de confirmaciones completan el affected.versions[]campo, lo que ayuda a lograr una coincidencia de versiones precisa.
+
+En algunos casos, puede que no haya versiones aplicables, por lo que la affected.versions[]matriz está vacía. Este campo, cuando está vacío, se omite en la salida de la API y aparece (pero vacío) en las exportaciones de datos .
+
+¿Cómo maneja OSV.dev los registros retirados?
+Los registros que tengan el withdrawncampo establecido se excluirán de:
+
+las respuestas a las consultas de la API POST
+la página de lista principal y los resultados de búsqueda relacionados
+La entrada permanece en la base de datos y es:
+
+devuelto por la /vulns/<ID>API GET
+visible en https://osv.dev/vulnerability/<ID>la página (y claramente marcado como "retirado")
+Todavía se exportan en las exportaciones del GCS (incluido el withdrawncampo)
+¿Cómo maneja OSV.dev los registros eliminados?
+Cuando se elimina un registro de una fuente ascendente, OSV.dev actualmente los maneja de manera diferente, dependiendo de dónde se importen:
+
+Fuentes GCS: OSV.dev marca los registros eliminados como withdrawn. Además, existe un umbral de seguridad en caso de problemas de disponibilidad de la fuente: si más del 10 % de los registros están a punto de marcarse como withdrawn, OSV.dev se cancela y no continúa.
+Fuentes REST y Git: OSV.dev mantiene los registros existentes válidos, pero huérfanos. Este comportamiento se modificará para que coincida con la fuente GCS. Consulte https://github.com/google/osv.dev/issues/2101 y https://github.com/google/osv.dev/issues/2294 .
+Infraestructura
+¿La tasa de API está limitada?
+No. Actualmente no hay un límite en la API.
+
+¿Existe algún límite en el tamaño de las respuestas?
+La API tiene un límite de tamaño de respuesta de 32 MB cuando se usa HTTP/1.1. No hay límite cuando se usa HTTP/2.
+
+Recomendamos utilizar HTTP/2 para consultas que puedan generar respuestas grandes (por ejemplo, grandes consultas OSV Linux).
+
+¿Cuáles son los objetivos de nivel de servicio (SLO) de OSV.dev?
+OSV.dev se esfuerza por proporcionar información fiable sobre vulnerabilidades a sus usuarios. Para ello, se han establecido los siguientes objetivos de nivel de servicio:
+
+Disponibilidad, sitio web y API: 99,9 % medido en un período continuo de 7 días.
+Estado latente:
+Sitio web: P50 ≤ 300 ms, P90 ≤ 500 ms, P95 ≤ 1 s, es decir, el 50 % de las solicitudes serán más rápidas que 300 ms, el 90 % de las solicitudes serán más rápidas que 500 ms y el 95 % de las solicitudes serán más rápidas que 1 s.
+API, por punto final:
+GET /v1/vulns/{id}: P50 ≤ 100 ms, P90 ≤ 200 ms, P95 ≤ 500 ms
+POST /v1/query: P50 ≤ 300 ms, P90 ≤ 500 ms, P95 ≤ 1 s
+POST /v1/querybatch: P50 ≤ 500 ms, P90 ≤ 4 s, P95 ≤ 6 s
+Frescura de los datos: las fuentes de datos no permanecen obsoletas durante más de 15 minutos, el 99,5 % del tiempo.
