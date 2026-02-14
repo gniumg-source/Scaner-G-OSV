@@ -1,0 +1,32 @@
+Establecimiento de la configuración predeterminada para el examen de código a gran escala
+Puedes configurar rápidamente el code scanning para los repositorios de toda la organización usando la configuración predeterminada.
+
+¿Quién puede utilizar esta característica?
+Propietarios de la organización, administradores de seguridad y miembros de la organización con el rol de administrador
+
+Code scanning is available for the following repository types:
+
+Public repositories on GitHub.com
+Organization-owned repositories on GitHub Team, GitHub Enterprise Cloud, or GitHub Enterprise Server, with GitHub Code Security enabled.
+En este artículo
+With default setup for code scanning, you can quickly secure code in repositories across your organization. For more information, see About setup types for code scanning.
+
+For repositories that are not suitable for default setup, you can configure advanced setup at the repository level, or at the organization level using a script.
+
+Prerequisites
+A repository must meet all the following criteria to be eligible for default setup:
+
+Advanced setup for code scanning is not already enabled.
+GitHub Actions is enabled.
+It is publicly visible, or GitHub Code Security is enabled.
+Configuring default setup for all eligible repositories in an organization
+You can enable default setup for all eligible repositories in your organization. For more information, see About enabling security features at scale.
+
+Extending CodeQL coverage in default setup
+Through your organization's security settings page, you can extend coverage in default setup using model packs for all eligible repositories in your organization. For more information, see Editing your configuration of default setup.
+
+Configuring default setup for a subset of repositories in an organization
+You can filter for specific repositories you would like to configure default setup for. For more information, see Applying a custom security configuration.
+
+Providing default setup access to private registries
+When a repository uses code stored in a private registry, default setup needs access to the registry to work effectively. For more information, see Giving security features access to private registries.
