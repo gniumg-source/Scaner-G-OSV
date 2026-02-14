@@ -1,0 +1,57 @@
+Documentación de GitHub
+Aplicaciones/Creación de aplicaciones de GitHub/Acerca de la creación de GitHub Apps/Acerca de la creación de aplicaciones
+Acerca de la creación de GitHub Apps
+Las GitHub Apps te permiten crear integraciones para automatizar los procesos y ampliar la funcionalidad de GitHub.
+
+En este artículo
+Acerca de las GitHub Apps
+Una GitHub App es un tipo de integración que puedes crear para interactuar con GitHub y extender su funcionalidad. Puedes crear una GitHub App para proporcionar flexibilidad y reducir la fricción en los procesos, sin que sea necesario que los usuarios inicien sesión o creen cuentas de servicio.
+
+Entre los casos de uso comunes para GitHub Apps, se incluyen:
+
+Automatización de tareas o procesos en segundo plano
+Compatibilidad con "Iniciar sesión con GitHub," que permite que los usuarios inicien sesión con su cuenta de GitHub para proporcionar su identidad en el ecosistema
+Como herramienta para desarrolladores, permitir que los usuarios trabajen con GitHub mediante el inicio de sesión en tu GitHub App, que luego puede actuar en su nombre
+Integración de la herramienta o servicio externo con GitHub
+Al igual que las OAuth apps, las GitHub Apps usan OAuth 2.0 y pueden actuar en nombre de un usuario. A diferencia de las OAuth apps, las GitHub Apps también pueden actuar de manera independiente del usuario.
+
+Las GitHub Apps se pueden instalar directamente en las cuentas de organización y personales, y se les puede dar acceso a repositorios específicos. Vienen con webhooks integrados y con permisos específicos y delimitados.
+
+Predeterminadamente, solo los propietarios de la organización pueden administrar los ajustes de las GitHub Apps en una organización. Para permitir que otros usuarios cambien la configuración del desarrollador de aplicaciones de GitHub que pertenecen a la organización, un propietario puede concederles permisos de administrador de aplicaciones de GitHub. Los administradores de aplicaciones de GitHub no pueden administrar aplicaciones de terceros. Para más información sobre cómo agregar y quitar administradores de aplicaciones de GitHub en la organización, consulta Roles en una organización.
+
+Compilación de una instancia de GitHub App
+Para compilar una instancia de GitHub App, primero debes registrar la GitHub App. Para más información, consulta Registro de una instancia de GitHub App.
+
+Luego, debes escribir código para agregar funcionalidad a tu instancia de GitHub App. Puedes usar las credenciales del registro de tu instancia de GitHub App para realizar solicitudes autenticadas a las API de GitHub. Para más información sobre la escritura de código para tu instancia de GitHub App, consulta Acerca de la escritura de código para una aplicación de GitHub. Para más información sobre la creación de solicitudes autenticadas, consulta Acerca de la autenticación con una aplicación de GitHub.
+
+Cuando hayas escrito el código para tu instancia de GitHub App, la aplicación debe ejecutarse en alguna parte. Si la aplicación es un sitio web o una aplicación web, puede que tengas que hospedar la aplicación en un servidor como Azure App Service. Si la aplicación es una aplicación del lado cliente, podría ejecutarse en el dispositivo de un usuario.
+
+Para usar GitHub App, debes instalarla en tu organización o cuenta personal.
+
+Si tu GitHub App es privada, solo se puede instalar en la cuenta propietaria de la aplicación.
+Si tu GitHub App es pública, otras cuentas también pueden instalarla.
+Para más información, consulta Instalación de tu propia instancia de GitHub App y Uso compartido de la instancia de GitHub App.
+
+Descripción del tipo de GitHub App que se va a compilar
+Hay varias maneras de diseñar una GitHub App que querrás tener en cuenta según la funcionalidad que quieres que tenga la aplicación.
+
+GitHub Apps que actúan en nombre de un usuario
+Si quieres que la aplicación realice acciones en nombre de un usuario, debes usar un token de acceso de usuario para la autenticación. Este tipo de solicitud se denomina a veces "usuario a servidor" y significa que la aplicación estará limitada por los permisos que se concedieron a la aplicación, así como el permiso del usuario. Con este patrón, el usuario debe autorizar la aplicación antes de que esta pueda realizar alguna acción. Para más información, consulta Autenticación con una aplicación de GitHub en nombre de un usuario.
+
+Entre los ejemplos de las automatizaciones que podrías crear con una GitHub App, en las que la aplicación actúa en nombre de un usuario, se incluyen las siguientes:
+
+Una instancia de GitHub App que usa GitHub como proveedor de identidades para el ecosistema.
+Una GitHub App que añade un servicio encima de GitHub que podría resultar útil para un usuario de GitHub. Puedes compartir la aplicación con otros desarrolladores a través de GitHub Marketplace o haciendo que la aplicación sea pública.
+GitHub Apps que actúan en su propio nombre
+Si quieres que la aplicación realice acciones en su propio nombre en lugar de hacerlo en nombre de un usuario, debes usar un token de acceso de instalación para la autenticación. Este tipo de solicitud se denomina a veces "servidor a servidor" y significa que la aplicación estará limitada por los permisos que se concedieron a la aplicación. Para más información, consulta Autenticación como una instalación de una aplicación de GitHub.
+
+Entre los ejemplos de las automatizaciones que podrías crear con una GitHub App, en las que la aplicación actúa en su propio nombre, se incluyen las siguientes:
+
+Una GitHub App que usa webhooks para reaccionar a un evento dado conjunto de criterios determinado. Por ejemplo, podría crear una automatización en torno a los puntos de conexión de la API REST para revisar las solicitudes de fine-grained personal access token que apruebe una solicitud dada una determinada directiva.
+Una GitHub App que ayude a los colaboradores del repositorio. Por ejemplo, la aplicación podría publicar recursos útiles después de que un colaborador crea una solicitud de incorporación de cambios o hace un comentario.
+Una instancia de GitHub App que genera tokens de corta duración para proporcionarlos a otras herramientas de CI/CD, o para extraer información de un repositorio.
+GitHub Apps que responden a los webhooks
+Si quieres que la aplicación responda a los eventos en GitHub, la aplicación se debe suscribir a los webhooks. Por ejemplo, puede que quieras que la aplicación deje un comentario cuando se abra una PR. Para más información, consulta Uso de webhooks con aplicaciones de GitHub.
+
+GitHub Apps que pueden realizar determinadas acciones
+Cuando configuras una GitHub App, puedes seleccionar permisos específicos para la aplicación. Estos permisos determinan lo que la aplicación puede hacer a través de la API de GitHub, lo que pueden hacer en nombre de un usuario que haya iniciado sesión y qué webhooks puede recibir la aplicación. Para más información, consulta Elección de permisos para una aplicación de GitHub.
